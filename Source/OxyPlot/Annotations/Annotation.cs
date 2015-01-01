@@ -71,6 +71,7 @@ namespace OxyPlot.Annotations
         /// <param name="model">The model.</param>
         public virtual void Render(IRenderContext rc, PlotModel model)
         {
+            this.EnsureAxes();
         }
 
         /// <summary>
