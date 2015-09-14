@@ -9,9 +9,9 @@
 
 namespace ExampleBrowser
 {
-
+    using System;
+    
     using CoreGraphics;
-
     using Foundation;
     using UIKit;
     using MessageUI;
@@ -24,87 +24,104 @@ namespace ExampleBrowser
     {
         private readonly ExampleInfo exampleInfo;
 
-		private PlotView plotView;
+        private PlotView plotView;
 
-        public GraphViewController (ExampleInfo exampleInfo)
+        public GraphViewController(ExampleInfo exampleInfo)
         {
             this.exampleInfo = exampleInfo;
-			this.plotView = new PlotView ();
-			this.plotView.Model = exampleInfo.PlotModel;
+            this.plotView = new PlotView();
+            this.plotView.Model = exampleInfo.PlotModel;
         }
 
-        public override void LoadView ()
+        public override void LoadView()
         {
-            NavigationItem.RightBarButtonItem= new UIBarButtonItem(UIBarButtonSystemItem.Compose,
-                delegate {
-                    var actionSheet = new UIActionSheet ("Email", null, "Cancel", "PNG", "PDF"){
-                        Style = UIActionSheetStyle.Default
-                    };
-
-                    actionSheet.Clicked += delegate (object sender, UIButtonEventArgs args){
-
-                        if(args.ButtonIndex > 1)
-                            return;
-
-                        Email(args.ButtonIndex == 0 ? "png" : "pdf");
-                    };
-
-                    actionSheet.ShowInView (View);
-                });
+			NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Compose);
 
             // Only for iOS 7 and later?
             this.EdgesForExtendedLayout = UIRectEdge.None;
 
             this.View = this.plotView;
-
         }
 
-		/// <summary>
-		/// Handles device orientation changes.
-		/// </summary>
-		/// <param name="fromInterfaceOrientation">The previous interface orientation.</param>
-		public override void DidRotate (UIInterfaceOrientation fromInterfaceOrientation)
+		public override void ViewDidAppear (bool animated)
 		{
-			base.DidRotate (fromInterfaceOrientation);
-			this.plotView.InvalidatePlot (false);
+			base.ViewDidAppear (animated);
+
+			NavigationItem.RightBarButtonItem.Clicked += HandleEmailButton;
 		}
-        
-		private void Email(string exportType)
+
+		public override void ViewDidDisappear (bool animated)
+		{
+			base.ViewDidDisappear (animated);
+
+			NavigationItem.RightBarButtonItem.Clicked -= HandleEmailButton;
+		}
+
+        /// <summary>
+        /// Handles device orientation changes.
+        /// </summary>
+        /// <param name="fromInterfaceOrientation">The previous interface orientation.</param>
+        public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)
         {
-            if(!MFMailComposeViewController.CanSendMail)
+            base.DidRotate(fromInterfaceOrientation);
+            this.plotView.InvalidatePlot(false);
+        }
+
+		private void HandleEmailButton(object sender, EventArgs args)
+		{
+			var actionSheet = new UIActionSheet("Email", null, "Cancel", "PNG", "PDF")
+			{
+				Style = UIActionSheetStyle.Default
+			};
+
+			actionSheet.Clicked += (s, e) =>
+			{
+				if (e.ButtonIndex > 1)
+					return;
+
+				Email(e.ButtonIndex == 0 ? "png" : "pdf");
+			};
+
+			actionSheet.ShowInView(View);
+		}
+
+        private void Email(string exportType)
+        {
+            if (!MFMailComposeViewController.CanSendMail)
                 return;
 
             var title = exampleInfo.Title + "." + exportType;
             NSData nsData = null;
             string attachmentType = "text/plain";
-            var rect = new CGRect(0,0,800,600);
-            switch(exportType)
+            var rect = new CGRect(0, 0, 800, 600);
+            switch (exportType)
             {
-            case "png":
-                nsData =  View.ToPng(rect);
-                attachmentType = "image/png";
-                break;
-            case "pdf":
-                nsData = View.ToPdf(rect);
-                attachmentType = "text/x-pdf";
-                break;
+                case "png":
+                    nsData = View.ToPng(rect);
+                    attachmentType = "image/png";
+                    break;
+                case "pdf":
+                    nsData = View.ToPdf(rect);
+                    attachmentType = "text/x-pdf";
+                    break;
             }
 
-            var mail = new MFMailComposeViewController ();
+            var mail = new MFMailComposeViewController();
             mail.SetSubject("OxyPlot - " + title);
-            mail.SetMessageBody ("Please find attached " + title, false);
+            mail.SetMessageBody("Please find attached " + title, false);
             mail.Finished += HandleMailFinished;
             mail.AddAttachmentData(nsData, attachmentType, title);
 
-            this.PresentViewController (mail, true, null);
+            this.PresentViewController(mail, true, null);
         }
 
-        private void HandleMailFinished (object sender, MFComposeResultEventArgs e)
+        private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
         {
-            if (e.Result == MFMailComposeResult.Sent) {
-                UIAlertView alert = new UIAlertView ("Mail Alert", "Mail Sent",
+            if (e.Result == MFMailComposeResult.Sent)
+            {
+                UIAlertView alert = new UIAlertView("Mail Alert", "Mail Sent",
                     null, "Yippie", null);
-                alert.Show ();
+                alert.Show();
 
                 // you should handle other values that could be returned
                 // in e.Result and also in e.Error

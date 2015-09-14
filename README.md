@@ -9,11 +9,15 @@ OxyPlot is a cross-platform plotting library for .NET
 - [NuGet packages](http://www.nuget.org/packages?q=oxyplot)
 - [Stack Overflow](http://stackoverflow.com/questions/tagged/oxyplot)
 - [Twitter](https://twitter.com/hashtag/oxyplot)
-- [Gitter](https://gitter.im/oxyplot/oxyplot)
+- [Gitter](https://gitter.im/oxyplot/oxyplot) (chat)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/mlaqnruo6ic3oe60)](https://ci.appveyor.com/project/objorke/oxyplot)
-
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/oxyplot/oxyplot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![License](https://img.shields.io/badge/license-MIT-red.svg)
+[![Build status](https://img.shields.io/appveyor/ci/objorke/oxyplot.svg)](https://ci.appveyor.com/project/objorke/oxyplot)
+![NuGet downloads](https://img.shields.io/nuget/dt/oxyplot.core.svg)
+![Version](https://img.shields.io/nuget/v/OxyPlot.Core.svg)
+![Pre-release version](https://img.shields.io/nuget/vpre/OxyPlot.Core.svg)
+![GitHub release](https://img.shields.io/github/release/oxyplot/oxyplot.svg)
+![GitHub tag](https://img.shields.io/github/tag/oxyplot/oxyplot.svg)
 
 ![Plot](http://oxyplot.org/public/images/normal-distributions.png)
 
@@ -35,6 +39,29 @@ See '[A successful git branching model](http://nvie.com/posts/a-successful-git-b
 
 You can find examples in the `/Source/Examples` folder in the code repository.
 
+#### NuGet packages
+
+![OxyPlot.Core](https://img.shields.io/nuget/vpre/OxyPlot.Core.svg?label=OxyPlot.Core)  
+![OxyPlot.Wpf](https://img.shields.io/nuget/vpre/OxyPlot.Wpf.svg?label=OxyPlot.Wpf)  
+![OxyPlot.WindowsForms](https://img.shields.io/nuget/vpre/OxyPlot.WindowsForms.svg?label=OxyPlot.WindowsForms)  
+![OxyPlot.GtkSharp](https://img.shields.io/nuget/vpre/OxyPlot.GtkSharp.svg?label=OxyPlot.GtkSharp)  
+![OxyPlot.Silverlight](https://img.shields.io/nuget/vpre/OxyPlot.Silverlight.svg?label=OxyPlot.Silverlight)  
+![OxyPlot.WP8](https://img.shields.io/nuget/vpre/OxyPlot.WP8.svg?label=OxyPlot.WP8)  
+![OxyPlot.Xamarin.Android](https://img.shields.io/nuget/vpre/OxyPlot.Xamarin.Android.svg?label=OxyPlot.Xamarin.Android)  
+![OxyPlot.Xamarin.iOS](https://img.shields.io/nuget/vpre/OxyPlot.Xamarin.iOS.svg?label=OxyPlot.Xamarin.iOS)  
+![OxyPlot.Xamarin.Mac](https://img.shields.io/nuget/vpre/OxyPlot.Xamarin.Mac.svg?label=OxyPlot.Xamarin.Mac)  
+![OxyPlot.Xamarin.Forms](https://img.shields.io/nuget/vpre/OxyPlot.Xamarin.Forms.svg?label=OxyPlot.Xamarin.Forms)  
+![OxyPlot.Xwt](https://img.shields.io/nuget/vpre/OxyPlot.Xwt.svg?label=OxyPlot.Xwt)  
+![OxyPlot.OpenXML](https://img.shields.io/nuget/vpre/OxyPlot.OpenXML.svg?label=OxyPlot.OpenXML)  
+![OxyPlot.Pdf](https://img.shields.io/nuget/vpre/OxyPlot.Pdf.svg?label=OxyPlot.Pdf)  
+
+![OxyPlot.WindowsUniversal](https://img.shields.io/nuget/vpre/OxyPlot.WindowsUniversal.svg?label=OxyPlot.WindowsUniversal)  
+![OxyPlot.Mobile](https://img.shields.io/nuget/vpre/OxyPlot.Mobile.svg?label=OxyPlot.Mobile)  
+![OxyPlot](https://img.shields.io/nuget/vpre/OxyPlot.svg?label=OxyPlot)  
+
 #### Contribute
 
 See [the documentation](http://oxyplot.org/documentation/contributions) for information about how to contribute!
+
+[![Pull request status](http://www.issuestats.com/github/oxyplot/oxyplot/badge/pr?style=flat)](http://www.issuestats.com/github/oxyplot/oxyplot/)
+[![Issues closed status](http://www.issuestats.com/github/oxyplot/oxyplot/badge/issue?style=flat)](http://www.issuestats.com/github/oxyplot/oxyplot/)
