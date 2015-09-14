@@ -13,7 +13,6 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>..\..\..\..\Icons\OxyPlot.ico</ApplicationIcon>
@@ -67,6 +66,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BitmapTools.cs" />
+    <Compile Include="Examples\AlignedAxesDemo\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\BoxPlotSeriesDemo\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PerformanceDemo\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Examples\ScatterErrorSeriesDemo\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -83,6 +91,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Examples\AxesDemo\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\AlignedAxesDemo\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\BoxPlotSeriesDemo\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\PerformanceDemo\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -210,6 +230,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Examples\TwoColorAreaDemo\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -248,6 +272,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ContextMenuDemo\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\TwoColorAreaDemo\MainViewModel.cs" />
+    <Compile Include="Examples\TwoColorAreaDemo\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\ContourDemo\MainViewModel.cs" />
@@ -356,6 +384,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Images\BoxPlotSeriesDemo.png" />
+    <Resource Include="Images\AlignedAxesDemo.png" />
+    <Resource Include="Images\PerformanceDemo.png" />
     <Resource Include="Images\ScatterErrorSeriesDemo.png" />
     <Resource Include="Images\ResizeDemo.png" />
     <None Include="ReadMe.txt" />
@@ -383,6 +414,7 @@
     <Resource Include="Images\RefreshDemo.png" />
     <Resource Include="Images\ScatterDemo.png" />
     <Resource Include="Examples\HistogramDemo\hare.jpg" />
+    <Resource Include="Images\TwoColorAreaDemo.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -427,8 +459,8 @@
       <Project>{87B7C658-12D9-4BD2-8FBB-9E4F2A670FB3}</Project>
       <Name>OxyPlot.Xps_NET40</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\OxyPlot\OxyPlot.csproj">
-      <Project>{7A0B35C0-DD17-4964-8E9A-44D6CECDC692}</Project>
+    <ProjectReference Include="..\..\..\OxyPlot\OxyPlot_NET40.csproj">
+      <Project>{1C1D9807-BE39-40A4-87DE-3F81E7C651E5}</Project>
       <Name>OxyPlot</Name>
     </ProjectReference>
   </ItemGroup>
@@ -436,5 +468,4 @@
     <Folder Include="Workitems\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>

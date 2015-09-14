@@ -170,8 +170,15 @@ namespace OxyPlot
         /// <param name="rect">The position and size of the legend.</param>
         private void RenderLegend(IRenderContext rc, Series.Series s, OxyRect rect)
         {
+            var actualItemAlignment = this.LegendItemAlignment;
+            if (this.LegendOrientation == LegendOrientation.Horizontal)
+            {
+                // center/right alignment is not supported for horizontal orientation
+                actualItemAlignment = HorizontalAlignment.Left;
+            }
+
             double x = rect.Left;
-            switch (this.LegendItemAlignment)
+            switch (actualItemAlignment)
             {
                 case HorizontalAlignment.Center:
                     x = (rect.Left + rect.Right) / 2;
@@ -199,7 +206,7 @@ namespace OxyPlot
             }
 
             double y = rect.Top;
-            var maxsize = new OxySize(Math.Max(rect.Right - x, 0), Math.Max(rect.Bottom - y, 0));
+            var maxsize = new OxySize(Math.Max(rect.Width - this.LegendSymbolLength - this.LegendSymbolMargin, 0), rect.Height);
 
             rc.SetToolTip(s.ToolTip);
             var textSize = rc.DrawMathText(
@@ -210,12 +217,12 @@ namespace OxyPlot
                 this.LegendFontSize,
                 this.LegendFontWeight,
                 0,
-                this.LegendItemAlignment,
+                actualItemAlignment,
                 VerticalAlignment.Top,
                 maxsize,
                 true);
             double x0 = x;
-            switch (this.LegendItemAlignment)
+            switch (actualItemAlignment)
             {
                 case HorizontalAlignment.Center:
                     x0 = x - (textSize.Width * 0.5);
@@ -325,7 +332,9 @@ namespace OxyPlot
             // the maximum item with in the column being rendered (only used for vertical orientation)
             double maxItemWidth = 0;
 
-            var items = this.LegendItemOrder == LegendItemOrder.Reverse ? this.VisibleSeries.Reverse() : this.VisibleSeries;
+            var items = this.LegendItemOrder == LegendItemOrder.Reverse
+                ? this.Series.Reverse().Where(s => s.IsVisible)
+                : this.Series.Where(s => s.IsVisible);
 
             // When orientation is vertical and alignment is center or right, the items cannot be rendered before
             // the max item width has been calculated. Render the items for each column, and at the end.
@@ -337,7 +346,7 @@ namespace OxyPlot
                         var itemRect = sr.Value;
                         var itemSeries = sr.Key;
 
-                        double rwidth = itemRect.Width;
+                        double rwidth = availableWidth;
                         if (itemRect.Left + rwidth + this.LegendPadding > rect.Left + availableWidth)
                         {
                             rwidth = rect.Left + availableWidth - itemRect.Left - this.LegendPadding;

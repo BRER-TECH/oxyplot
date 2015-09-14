@@ -79,26 +79,28 @@
     <Compile Include="Axes\LogarithmicAxis.cs" />
     <Compile Include="Converters\ThicknessConverter.cs" />
     <Compile Include="Converters\OxyColorConverter.cs" />
+    <Compile Include="PlotBase.cs" />
+    <Compile Include="PlotBase.Events.cs" />
+    <Compile Include="PlotBase.Export.cs" />
     <Compile Include="PlotCommands.cs" />
     <Compile Include="PlotView.cs" />
-    <Compile Include="PlotView.Properties.cs" />
-    <Compile Include="PlotView.TouchEvents.cs" />
+    <Compile Include="Plot.Properties.cs" />
+    <Compile Include="Series\BarSeries\LinearBarSeries.cs" />
+    <Compile Include="Series\BoxPlotSeries.cs" />
     <Compile Include="Series\HeatMapSeries.cs" />
     <Compile Include="Series\ScatterSeries{T}.cs" />
     <Compile Include="Series\StairStepSeries.cs" />
     <Compile Include="Series\ScatterErrorSeries.cs" />
-    <Compile Include="Utilities\WeakEvents\RenderingEventListener.cs" />
-    <Compile Include="Utilities\WeakEvents\RenderingEventManager.cs" />
-    <Compile Include="Utilities\WeakEvents\WeakEventListener{TEventManager,TEventArgs}.cs" />
-    <Compile Include="Utilities\WeakEvents\WeakEventManagerBase{TManager}.cs" />
     <Compile Include="MoreColors.cs" />
     <Compile Include="NamespaceDoc.cs" />
-    <Compile Include="RenderingControl.cs" />
     <Compile Include="Series\BarSeries\ColumnSeries.cs" />
     <Compile Include="Series\BarSeries\CategorizedSeries.cs" />
     <Compile Include="Series\BarSeries\BarSeriesBase.cs" />
     <Compile Include="Series\BarSeries\BarSeriesBase{T}.cs" />
+    <Compile Include="Series\ThreeColorLineSeries.cs" />
+    <Compile Include="Series\TwoColorAreaSeries.cs" />
     <Compile Include="SvgExporter.cs" />
+    <Compile Include="TextMeasurementMethod.cs" />
     <Compile Include="Utilities\Keyboard.cs" />
     <Compile Include="XamlExporter.cs" />
     <Compile Include="PngExporter.cs" />
@@ -111,15 +113,12 @@
     <Compile Include="Tracker\TrackerControl.cs" />
     <Compile Include="Tracker\TrackerDefinition.cs" />
     <None Include="OxyPlot.Wpf.snk" />
-    <None Include="RenderContexts\GeometryRenderContext.cs" />
-    <None Include="RenderContexts\DrawingRenderContext.cs" />
-    <None Include="PlotFrame.cs" />
     <Compile Include="Series\AreaSeries.cs" />
     <Compile Include="Series\LineSeries.cs" />
     <Compile Include="Plot.cs" />
     <Compile Include="Series\DataPointSeries.cs" />
     <Compile Include="Utilities\ConverterExtensions.cs" />
-    <Compile Include="RenderContexts\ShapesRenderContext.cs" />
+    <Compile Include="CanvasRenderContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -139,6 +138,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Include="PlotBase.Properties.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

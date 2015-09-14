@@ -22,6 +22,11 @@ namespace OxyPlot.Series
     public class TornadoBarSeries : CategorizedSeries
     {
         /// <summary>
+        /// The default tracker format string
+        /// </summary>
+        public new const string DefaultTrackerFormatString = "{0}\n{1}: {2}\n{3}: {4}";
+
+        /// <summary>
         /// The default fill color.
         /// </summary>
         private OxyColor defaultMaximumFillColor;
@@ -46,7 +51,7 @@ namespace OxyPlot.Series
             this.StrokeThickness = 1;
             this.BarWidth = 1;
 
-            this.TrackerFormatString = "{0}\n{1}: {2}\n{3}: {4}";
+            this.TrackerFormatString = DefaultTrackerFormatString;
             this.LabelMargin = 4;
 
             this.MinimumLabelFormatString = "{0}";
@@ -196,7 +201,8 @@ namespace OxyPlot.Series
                         Item = item,
                         Index = i,
                         Text =
-                            this.Format(
+                            StringHelper.Format(
+                                this.ActualCulture, 
                                 this.TrackerFormatString,
                                 item,
                                 this.Title,
@@ -226,8 +232,7 @@ namespace OxyPlot.Series
         /// Renders the Series on the specified rendering context.
         /// </summary>
         /// <param name="rc">The rendering context.</param>
-        /// <param name="model">The model.</param>
-        public override void Render(IRenderContext rc, PlotModel model)
+        public override void Render(IRenderContext rc)
         {
             this.ActualMinimumBarRectangles = new List<OxyRect>();
             this.ActualMaximumBarRectangles = new List<OxyRect>();
@@ -275,7 +280,8 @@ namespace OxyPlot.Series
 
                 if (this.MinimumLabelFormatString != null)
                 {
-                    var s = this.Format(
+                    var s = StringHelper.Format(
+                        this.ActualCulture, 
                         this.MinimumLabelFormatString,
                         this.GetItem(this.ValidItemsIndexInversion[i]),
                         item.Minimum);
@@ -297,7 +303,8 @@ namespace OxyPlot.Series
 
                 if (this.MaximumLabelFormatString != null)
                 {
-                    var s = this.Format(
+                    var s = StringHelper.Format(
+                        this.ActualCulture, 
                         this.MaximumLabelFormatString,
                         this.GetItem(this.ValidItemsIndexInversion[i]),
                         item.Maximum);

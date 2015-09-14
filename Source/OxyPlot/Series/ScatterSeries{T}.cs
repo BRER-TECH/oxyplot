@@ -46,7 +46,6 @@ namespace OxyPlot.Series
             this.MarkerType = MarkerType.Square;
             this.MarkerStroke = OxyColors.Automatic;
             this.MarkerStrokeThickness = 1;
-            this.TrackerFormatString = "{0}\n{1}: {2:0.###}\n{3}: {4:0.###}";
             this.LabelMargin = 6;
         }
 
@@ -204,7 +203,7 @@ namespace OxyPlot.Series
         {
             get
             {
-                return new System.Collections.ObjectModel.ReadOnlyCollection<T>(this.ActualPointsList);
+                return this.ActualPointsList != null ? new System.Collections.ObjectModel.ReadOnlyCollection<T>(this.ActualPointsList) : null;
             }
         }
 
@@ -314,8 +313,7 @@ namespace OxyPlot.Series
         /// Renders the series on the specified rendering context.
         /// </summary>
         /// <param name="rc">The rendering context.</param>
-        /// <param name="model">The owner plot model.</param>
-        public override void Render(IRenderContext rc, PlotModel model)
+        public override void Render(IRenderContext rc)
         {
             var actualPoints = this.ActualPointsList;
             int n = actualPoints.Count;
@@ -415,7 +413,7 @@ namespace OxyPlot.Series
                         this.MarkerType,
                         this.MarkerOutline,
                         groupSizes[group.Key],
-                        color,
+                        this.MarkerFill.GetActualColor(color),
                         markerIsStrokedOnly ? color : this.MarkerStroke,
                         this.MarkerStrokeThickness,
                         this.BinSize,
@@ -551,7 +549,7 @@ namespace OxyPlot.Series
                 }
 
                 var item = this.GetItem(index);
-                var s = this.Format(this.LabelFormatString, item, point.X, point.Y);
+                var s = StringHelper.Format(this.ActualCulture, this.LabelFormatString, item, point.X, point.Y);
 
 #if SUPPORTLABELPLACEMENT
                     switch (this.LabelPlacement)
@@ -654,7 +652,7 @@ namespace OxyPlot.Series
                     continue;
                 }
 
-                double value = pt.value;
+                double value = pt.Value;
 
                 if (x < minx)
                 {
@@ -769,7 +767,7 @@ namespace OxyPlot.Series
 
             foreach (var pt in pts)
             {
-                double value = pt.value;
+                double value = pt.Value;
 
                 if (value < minvalue || double.IsNaN(minvalue))
                 {
