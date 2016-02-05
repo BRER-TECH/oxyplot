@@ -139,11 +139,16 @@ namespace OxyPlot.Series
             return this.XAxis.Transform(p.X, p.Y, this.YAxis);
         }
 
-        /// <summary>
-        /// Check if this data series requires X/Y axes. (e.g. Pie series do not require axes)
-        /// </summary>
-        /// <returns>The are axes required.</returns>
-        protected internal override bool AreAxesRequired()
+		/// <summary>
+		/// Y-Offset for the Tracker
+		/// </summary>
+		public double YOffsetForTracker { get; set; }
+
+		/// <summary>
+		/// Check if this data series requires X/Y axes. (e.g. Pie series do not require axes)
+		/// </summary>
+		/// <returns>The are axes required.</returns>
+		protected internal override bool AreAxesRequired()
         {
             return true;
         }
@@ -272,7 +277,9 @@ namespace OxyPlot.Series
             if (minimumDistance < double.MaxValue)
             {
                 var item = this.GetItem((int)Math.Round(index));
-                return new TrackerHitResult
+				dpn.y += YOffsetForTracker;
+
+				return new TrackerHitResult
                 {
                     Series = this,
                     DataPoint = dpn,
@@ -322,10 +329,12 @@ namespace OxyPlot.Series
                 i++;
             }
 
-            if (minimumDistance < double.MaxValue)
+			if (minimumDistance < double.MaxValue)
             {
                 var item = this.GetItem((int)Math.Round(index));
-                return new TrackerHitResult
+				dpn.y += YOffsetForTracker;
+
+				return new TrackerHitResult
                 {
                     Series = this,
                     DataPoint = dpn,
